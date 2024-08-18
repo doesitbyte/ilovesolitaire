@@ -58,7 +58,9 @@ export default class GameState extends Phaser.Scene {
   }
 
   public create(): void {
-    this.game.input.touch.capture = false;
+    try {
+      this.game.input.touch.capture = false;
+    } catch (e) {}
 
     // Game state variables
     this.score = 0;
