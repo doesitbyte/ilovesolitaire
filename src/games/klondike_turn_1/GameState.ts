@@ -237,6 +237,9 @@ export default class GameState extends Phaser.Scene {
   }
 
   public showDifficultyMenu(): void {
+    if (this.difficultyMenu) {
+      this.difficultyMenu.destroy();
+    }
     const rect = this.add.graphics();
     rect.fillStyle(0xffffff, 1);
     rect.fillRect(SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 100, 200, 200);
