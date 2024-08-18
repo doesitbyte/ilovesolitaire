@@ -15,9 +15,16 @@ const GameLoader: React.FC<GameProps> = ({ config }) => {
       },
     };
 
+    // config.scale = {
+    //   mode: Phaser.Scale.FIT,
+    //   autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
+    // };
+
     config.scale = {
-      mode: Phaser.Scale.FIT,
-      autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
+      mode: Phaser.Scale.RESIZE,
+      autoCenter: Phaser.Scale.CENTER_BOTH,
+      // width: window.innerWidth,
+      height: window.innerHeight,
     };
 
     const game = new Phaser.Game(config);
@@ -27,7 +34,12 @@ const GameLoader: React.FC<GameProps> = ({ config }) => {
     };
   }, [config]);
 
-  return <div className="max-w-screen max-h-fit" id="game-container"></div>;
+  return (
+    <div
+      className="h-full w-full flex justify-center items-center bg-red-100"
+      id="game-container"
+    ></div>
+  );
 };
 
 export default GameLoader;

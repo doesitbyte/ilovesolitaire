@@ -11,7 +11,7 @@ const Header: React.FC = () => {
     <nav className="bg-white text-black shadow-2xl mb-4 p-4">
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/">
-          <Image src="/img/logo.png" alt="logo" className="h-6" />
+          <Image src="/img/logo.png" alt="logo" height={24} width={100} />
         </Link>
         <div className="hidden md:flex space-x-4">
           <div className="relative group">

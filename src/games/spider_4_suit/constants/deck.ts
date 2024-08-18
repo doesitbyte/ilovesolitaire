@@ -35,20 +35,3 @@ export const SUIT_COLOR = {
   [Suit.Clubs]: SuitColor.Black,
   [Suit.Spades]: SuitColor.Black,
 } as const;
-
-/**
- * Deck dimensions
- */
-export const CARD_DIMENSIONS = {
-  height: 120,
-  width: 84,
-};
-
-export const NUM_CARDS = 52;
-export const NUM_SUITS = 4;
-export const NUM_VALUES = 13;
-
-export const SPRITE_CARD_WIDTH = 14;
-export const CARD_BACK_INDEX = 27;
-export const STACK_OFFSET = 20;
-export const STACK_DRAG_OFFSET = 30;

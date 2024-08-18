@@ -1,16 +1,12 @@
 "use client";
 
 import * as Phaser from "phaser";
+import { SUIT_IMAGE_INDEX, Suit, SuitColor } from "./constants/deck";
 import {
   CARD_BACK_INDEX,
   STACK_OFFSET,
   SPRITE_CARD_WIDTH,
-  SUIT_IMAGE_INDEX,
   CARD_DIMENSIONS,
-  Suit,
-  SuitColor,
-} from "./constants/deck";
-import {
   FOUNDATION_PILES,
   PileId,
   PILE_POSITIONS,

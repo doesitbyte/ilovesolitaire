@@ -6,8 +6,13 @@ import * as Phaser from "phaser";
 
 import Deck from "./Deck";
 import Card from "./Card";
-import { FOUNDATION_PILES, PileId, TABLEAU_PILES } from "./constants/table";
-import { STACK_DRAG_OFFSET, SUIT_COLOR } from "./constants/deck";
+import {
+  STACK_DRAG_OFFSET,
+  FOUNDATION_PILES,
+  PileId,
+  TABLEAU_PILES,
+} from "./constants/table";
+import { SUIT_COLOR } from "./constants/deck";
 import { Pile } from "./Pile";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../screen";
 
@@ -52,13 +57,17 @@ export default class GameState extends Phaser.Scene {
   }
 
   public create(): void {
+    this.game.input.touch.capture = false;
+
     // Game state variables
     this.score = 0;
     this.dragChildren = [];
     this.moves = [];
 
     // Add background
-    this.add.image(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, "img_background");
+    this.add
+      .image(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, "img_background")
+      .setDisplaySize(window.innerWidth, window.innerHeight);
 
     // Add deck
     this.deck = new Deck(this, "easy");
@@ -103,6 +112,7 @@ export default class GameState extends Phaser.Scene {
         _pointer: Phaser.Input.Pointer,
         gameObject: Phaser.GameObjects.GameObject
       ) => {
+        _pointer.event.preventDefault();
         if (gameObject instanceof Card) {
           this.dragCardStart(gameObject);
         }
@@ -117,6 +127,7 @@ export default class GameState extends Phaser.Scene {
         _pointer: Phaser.Input.Pointer,
         gameObject: Phaser.GameObjects.GameObject
       ) => {
+        _pointer.event.preventDefault();
         if (gameObject instanceof Card) {
           this.dragCardEnd();
         }
@@ -132,6 +143,7 @@ export default class GameState extends Phaser.Scene {
         gameObject: Phaser.GameObjects.GameObject,
         dropZone: Phaser.GameObjects.GameObject
       ) => {
+        _pointer.event.preventDefault();
         if (gameObject instanceof Card) {
           this.dropCard(gameObject, dropZone);
         }
@@ -148,6 +160,7 @@ export default class GameState extends Phaser.Scene {
         dragX: number,
         dragY: number
       ) => {
+        _pointer.event.preventDefault();
         if (gameObject instanceof Card) {
           this.dragCard(gameObject, dragX, dragY);
         }

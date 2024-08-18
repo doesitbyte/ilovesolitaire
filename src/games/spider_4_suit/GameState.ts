@@ -6,8 +6,12 @@ import * as Phaser from "phaser";
 
 import Deck from "./Deck";
 import Card from "./Card";
-import { FOUNDATION_PILES, PileId, TABLEAU_PILES } from "./constants/table";
-import { STACK_DRAG_OFFSET } from "./constants/deck";
+import {
+  STACK_DRAG_OFFSET,
+  FOUNDATION_PILES,
+  PileId,
+  TABLEAU_PILES,
+} from "./constants/table";
 import { Pile } from "./Pile";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../screen";
 
@@ -54,13 +58,17 @@ export default class GameState extends Phaser.Scene {
   }
 
   public create(): void {
+    this.game.input.touch.capture = false;
+
     // Game state variables
     this.score = 0;
     this.dragChildren = [];
     this.moves = [];
 
     // Add background
-    this.add.image(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, "img_background");
+    this.add
+      .image(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, "img_background")
+      .setDisplaySize(window.innerWidth, window.innerHeight);
 
     // Add deck
     this.deck = new Deck(this, "easy");
@@ -105,6 +113,7 @@ export default class GameState extends Phaser.Scene {
         _pointer: Phaser.Input.Pointer,
         gameObject: Phaser.GameObjects.GameObject
       ) => {
+        _pointer.event.preventDefault();
         if (gameObject instanceof Card) {
           this.dragCardStart(gameObject);
         }
@@ -119,6 +128,7 @@ export default class GameState extends Phaser.Scene {
         _pointer: Phaser.Input.Pointer,
         gameObject: Phaser.GameObjects.GameObject
       ) => {
+        _pointer.event.preventDefault();
         if (gameObject instanceof Card) {
           this.dragCardEnd();
         }
@@ -134,6 +144,7 @@ export default class GameState extends Phaser.Scene {
         gameObject: Phaser.GameObjects.GameObject,
         dropZone: Phaser.GameObjects.GameObject
       ) => {
+        _pointer.event.preventDefault();
         if (gameObject instanceof Card) {
           this.dropCard(gameObject, dropZone);
         }
@@ -150,6 +161,7 @@ export default class GameState extends Phaser.Scene {
         dragX: number,
         dragY: number
       ) => {
+        _pointer.event.preventDefault();
         if (gameObject instanceof Card) {
           this.dragCard(gameObject, dragX, dragY);
         }
@@ -213,24 +225,44 @@ export default class GameState extends Phaser.Scene {
               );
             }
           }
+
+          TABLEAU_PILES.forEach((pileId) => {
+            this.updateDraggableState(pileId);
+          });
         },
         this
       );
   }
 
   public showDifficultyMenu(): void {
+    if (this.difficultyMenu) {
+      this.difficultyMenu.destroy();
+    }
+
     const rect = this.add.graphics();
     rect.fillStyle(0xffffff, 1);
     rect.fillRect(SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 50, 200, 100);
 
     const easy = this.add
-      .text(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 25, "Easy")
+      .text(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 25, "Easy", {
+        fontSize: "32px",
+        color: "#000",
+      })
+      .setOrigin(0.5, 0.5)
       .setInteractive();
     const medium = this.add
-      .text(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, "Medium")
+      .text(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, "Medium", {
+        fontSize: "32px",
+        color: "#000",
+      })
+      .setOrigin(0.5, 0.5)
       .setInteractive();
     const hard = this.add
-      .text(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 25, "Hard")
+      .text(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 25, "Hard", {
+        fontSize: "32px",
+        color: "#000",
+      })
+      .setOrigin(0.5, 0.5)
       .setInteractive();
 
     easy.on("pointerdown", () => this.newGame("easy"));
@@ -238,9 +270,11 @@ export default class GameState extends Phaser.Scene {
     hard.on("pointerdown", () => this.newGame("hard"));
 
     this.difficultyMenu = this.add.container(0, 0, [rect, easy, medium, hard]);
+    this.difficultyMenu.setDepth(2000);
   }
 
   public newGame(difficulty: string): void {
+    this.difficultyMenu.destroy();
     this.clearGame();
     this.deck = new Deck(this, difficulty);
     this.createZones();
@@ -249,6 +283,9 @@ export default class GameState extends Phaser.Scene {
     this.createText();
     this.difficultyMenu.destroy();
     this.winText.setVisible(false);
+    this.score = 0;
+    this.foundationPilesFilled = 0;
+    this.moves = [];
   }
 
   public createText(): void {
@@ -274,7 +311,12 @@ export default class GameState extends Phaser.Scene {
         stock.flip(this);
         newMove = false;
         const topCard = this.deck.topCard(pileId);
-        this.logCardMovement(stock, pileId, 0, newMove);
+        this.logCardMovement(
+          stock,
+          pileId,
+          topCard ? topCard.position + 1 : 0,
+          newMove
+        );
         stock.reposition(pileId, topCard ? topCard.position + 1 : 0);
       }
     });
@@ -405,16 +447,16 @@ export default class GameState extends Phaser.Scene {
       this.updateDraggableState(pileId);
       this.updateDraggableState(startPile);
 
-      // Check for completed sequences
-      this.checkForCompletedSequences(pileId);
-
       // Update score
       this.updateScore(1);
 
-      // Check for win condition
-      if (this.checkWinSpider()) {
-        this.winText.setVisible(true);
-      }
+      // Check for completed sequences
+      setTimeout(() => {
+        if (this.checkForCompletedSequences(pileId))
+          if (this.checkWinSpider()) {
+            this.winText.setVisible(true);
+          }
+      }, 500);
     }
   }
 
@@ -444,7 +486,7 @@ export default class GameState extends Phaser.Scene {
     });
   }
 
-  private checkForCompletedSequences(pileId: PileId): void {
+  private checkForCompletedSequences(pileId: PileId): boolean {
     const cardsInPile = this.deck.cardsInPile(pileId);
     const topCard = this.deck.topCard(pileId);
 
@@ -475,8 +517,10 @@ export default class GameState extends Phaser.Scene {
         }
         this.updateScore(100);
         this.foundationPilesFilled += 1;
+        return true;
       }
     }
+    return false;
   }
 
   // Spider Solitaire specific win condition check

@@ -1,5 +1,3 @@
-import { CARD_DIMENSIONS } from "./deck";
-
 /**
  * Define the constants for the table.
  */
@@ -58,32 +56,126 @@ export const FREECELL_PILES = [
 ];
 
 /**
+ * Card dimensions
+ */
+const windowWidth = window.innerWidth;
+const windowHeight = window.innerHeight;
+const maxNumberOfColumns = 8;
+const maxColumnWidth = windowWidth / maxNumberOfColumns;
+
+export const CARD_DIMENSIONS = {
+  width: windowWidth * 0.1 > 100 ? 100 : windowWidth * 0.1,
+  height: windowWidth * 0.1 * 1.5 > 150 ? 150 : windowWidth * 0.1 * 1.5,
+};
+
+/**
  * Offsets for card positions
  */
-const PILE_OFFSET = CARD_DIMENSIONS.width + 20;
+console.log(maxColumnWidth, CARD_DIMENSIONS.width);
+
+const PILE_OFFSET =
+  CARD_DIMENSIONS.width < 100
+    ? CARD_DIMENSIONS.width * 1.1
+    : maxColumnWidth > CARD_DIMENSIONS.width
+    ? maxColumnWidth - CARD_DIMENSIONS.width / 2
+    : CARD_DIMENSIONS.width;
+
+const LEFT_OFFSET =
+  CARD_DIMENSIONS.width < 100
+    ? 0
+    : (windowWidth - PILE_OFFSET * maxNumberOfColumns) / 2 -
+      CARD_DIMENSIONS.width / 2;
 
 /**
  * Positions of piles on screen
  */
+const tableau_start_x = CARD_DIMENSIONS.width + LEFT_OFFSET;
+const tableau_start_y =
+  windowHeight > windowWidth
+    ? CARD_DIMENSIONS.height * 3.5
+    : CARD_DIMENSIONS.height * 2.5;
+const freecell_start_x = CARD_DIMENSIONS.width + LEFT_OFFSET;
+const freecell_start_y =
+  windowHeight > windowWidth
+    ? CARD_DIMENSIONS.height * 2
+    : CARD_DIMENSIONS.height * 1;
 export const PILE_POSITIONS: Record<PileId, Phaser.Math.Vector2> = {
-  [PileId.FreeCell1]: new Phaser.Math.Vector2(120, 120),
-  [PileId.FreeCell2]: new Phaser.Math.Vector2(120 + PILE_OFFSET, 120),
-  [PileId.FreeCell3]: new Phaser.Math.Vector2(120 + 2 * PILE_OFFSET, 120),
-  [PileId.FreeCell4]: new Phaser.Math.Vector2(120 + 3 * PILE_OFFSET, 120),
+  [PileId.FreeCell1]: new Phaser.Math.Vector2(
+    freecell_start_x,
+    freecell_start_y
+  ),
+  [PileId.FreeCell2]: new Phaser.Math.Vector2(
+    freecell_start_x + PILE_OFFSET,
+    freecell_start_y
+  ),
+  [PileId.FreeCell3]: new Phaser.Math.Vector2(
+    freecell_start_x + 2 * PILE_OFFSET,
+    freecell_start_y
+  ),
+  [PileId.FreeCell4]: new Phaser.Math.Vector2(
+    freecell_start_x + 3 * PILE_OFFSET,
+    freecell_start_y
+  ),
 
-  [PileId.Foundation1]: new Phaser.Math.Vector2(120 + 4 * PILE_OFFSET, 120),
-  [PileId.Foundation2]: new Phaser.Math.Vector2(120 + 5 * PILE_OFFSET, 120),
-  [PileId.Foundation3]: new Phaser.Math.Vector2(120 + 6 * PILE_OFFSET, 120),
-  [PileId.Foundation4]: new Phaser.Math.Vector2(120 + 7 * PILE_OFFSET, 120),
+  [PileId.Foundation1]: new Phaser.Math.Vector2(
+    freecell_start_x + 4 * PILE_OFFSET,
+    freecell_start_y
+  ),
+  [PileId.Foundation2]: new Phaser.Math.Vector2(
+    freecell_start_x + 5 * PILE_OFFSET,
+    freecell_start_y
+  ),
+  [PileId.Foundation3]: new Phaser.Math.Vector2(
+    freecell_start_x + 6 * PILE_OFFSET,
+    freecell_start_y
+  ),
+  [PileId.Foundation4]: new Phaser.Math.Vector2(
+    freecell_start_x + 7 * PILE_OFFSET,
+    freecell_start_y
+  ),
 
-  [PileId.Tableau1]: new Phaser.Math.Vector2(120, 280),
-  [PileId.Tableau2]: new Phaser.Math.Vector2(120 + PILE_OFFSET, 280),
-  [PileId.Tableau3]: new Phaser.Math.Vector2(120 + 2 * PILE_OFFSET, 280),
-  [PileId.Tableau4]: new Phaser.Math.Vector2(120 + 3 * PILE_OFFSET, 280),
-  [PileId.Tableau5]: new Phaser.Math.Vector2(120 + 4 * PILE_OFFSET, 280),
-  [PileId.Tableau6]: new Phaser.Math.Vector2(120 + 5 * PILE_OFFSET, 280),
-  [PileId.Tableau7]: new Phaser.Math.Vector2(120 + 6 * PILE_OFFSET, 280),
-  [PileId.Tableau8]: new Phaser.Math.Vector2(120 + 7 * PILE_OFFSET, 280),
+  [PileId.Tableau1]: new Phaser.Math.Vector2(tableau_start_x, tableau_start_y),
+  [PileId.Tableau2]: new Phaser.Math.Vector2(
+    tableau_start_x + PILE_OFFSET,
+    tableau_start_y
+  ),
+  [PileId.Tableau3]: new Phaser.Math.Vector2(
+    tableau_start_x + 2 * PILE_OFFSET,
+    tableau_start_y
+  ),
+  [PileId.Tableau4]: new Phaser.Math.Vector2(
+    tableau_start_x + 3 * PILE_OFFSET,
+    tableau_start_y
+  ),
+  [PileId.Tableau5]: new Phaser.Math.Vector2(
+    tableau_start_x + 4 * PILE_OFFSET,
+    tableau_start_y
+  ),
+  [PileId.Tableau6]: new Phaser.Math.Vector2(
+    tableau_start_x + 5 * PILE_OFFSET,
+    tableau_start_y
+  ),
+  [PileId.Tableau7]: new Phaser.Math.Vector2(
+    tableau_start_x + 6 * PILE_OFFSET,
+    tableau_start_y
+  ),
+  [PileId.Tableau8]: new Phaser.Math.Vector2(
+    tableau_start_x + 7 * PILE_OFFSET,
+    tableau_start_y
+  ),
 
   [PileId.None]: new Phaser.Math.Vector2(0, 0),
 };
+
+/**
+ * Deck dimensions
+ */
+
+export const NUM_CARDS = 52;
+export const NUM_SUITS = 4;
+export const NUM_VALUES = 13;
+
+export const SPRITE_CARD_WIDTH = 14;
+export const CARD_BACK_INDEX = 27;
+export const STACK_OFFSET = CARD_DIMENSIONS.height * 0.25;
+export const STACK_DRAG_OFFSET = 30;
