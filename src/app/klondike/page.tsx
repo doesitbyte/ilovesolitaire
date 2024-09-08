@@ -1,30 +1,14 @@
 import React from "react";
-import config_klondike_1 from "@games/klondike_turn_1/main";
-import config_klondike_3 from "@games/klondike_turn_3/main";
-import GameLoader from "@components/Game";
+import dynamic from "next/dynamic";
+const GameLoader = dynamic(() => import("@components/Game"), { ssr: false });
 import { ContentLoader, KlondikeContent } from "@components/Content";
 import { Metadata } from "next";
+import { IGameType } from "@/interfaces/game-types";
 
-export default function KlondikePage({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
-  let config;
-  switch (searchParams.variant) {
-    case "turn_1":
-      config = config_klondike_1;
-      break;
-    case "turn_3":
-      config = config_klondike_3;
-      break;
-    default:
-      config = config_klondike_1;
-      break;
-  }
+export default function KlondikePage() {
   return (
     <>
-      <GameLoader config={config} />
+      <GameLoader name={IGameType.KlondikeTurn3} />
       <ContentLoader>
         <KlondikeContent />
       </ContentLoader>

@@ -8,8 +8,8 @@ import PreInitState from "../states/PreInitState";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../screen";
 
 const config: Phaser.Types.Core.GameConfig = {
-  antialias: false,
-  antialiasGL: false,
+  antialias: true,
+  antialiasGL: true,
   backgroundColor: "#000",
   height: SCREEN_HEIGHT,
   parent: "game-container",

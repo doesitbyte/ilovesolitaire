@@ -18,13 +18,13 @@ const Header: React.FC = () => {
             <button className=" focus:outline-none">Klondike Solitaire</button>
             <div className="absolute hidden group-hover:block bg-white rounded shadow-lg">
               <Link
-                href="/klondike?variant=turn_1"
+                href="/klondike"
                 className="block px-4 py-2  hover:bg-white"
               >
                 Klondike Turn 1
               </Link>
               <Link
-                href="/klondike?variant=turn_3"
+                href="/klondike/turn-3"
                 className="block px-4 py-2  hover:bg-white"
               >
                 Klondike Turn 3
@@ -34,20 +34,17 @@ const Header: React.FC = () => {
           <div className="relative group">
             <button className=" focus:outline-none">Spider Solitaire</button>
             <div className="absolute hidden group-hover:block bg-white rounded shadow-lg">
-              <Link
-                href="/spider?variant=suit_1"
-                className="block px-4 py-2  hover:bg-white"
-              >
+              <Link href="/spider" className="block px-4 py-2  hover:bg-white">
                 Spider 1 Suit
               </Link>
               <Link
-                href="/spider?variant=suit_2"
+                href="/spider/2-suits"
                 className="block px-4 py-2  hover:bg-white"
               >
                 Spider 2 Suits
               </Link>
               <Link
-                href="/spider?variant=suit_4"
+                href="/spider/4-suits"
                 className="block px-4 py-2  hover:bg-white"
               >
                 Spider 4 Suits

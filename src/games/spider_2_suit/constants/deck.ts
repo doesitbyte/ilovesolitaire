@@ -20,9 +20,9 @@ export enum SuitColor {
  * Defines sprite offset of each suit in the spritemap.
  */
 export const SUIT_IMAGE_INDEX = {
-  [Suit.Hearts]: 0,
+  [Suit.Hearts]: 2,
   [Suit.Diamonds]: 1,
-  [Suit.Clubs]: 2,
+  [Suit.Clubs]: 0,
   [Suit.Spades]: 3,
 } as const;
 

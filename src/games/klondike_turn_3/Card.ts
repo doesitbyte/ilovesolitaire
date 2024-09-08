@@ -91,7 +91,9 @@ export default class Card extends Phaser.GameObjects.Sprite {
   }
 
   public getSpriteIndex(suit: Suit, value: number): number {
-    return SUIT_IMAGE_INDEX[suit] * SPRITE_CARD_WIDTH + value - 1;
+    const spriteIndex = 13 * SUIT_IMAGE_INDEX[suit] + (value - 1);
+
+    return spriteIndex;
   }
 
   public moveTo(

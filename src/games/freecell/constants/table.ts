@@ -1,3 +1,5 @@
+import { isMobile } from "react-device-detect";
+
 /**
  * Define the constants for the table.
  */
@@ -60,41 +62,57 @@ export const FREECELL_PILES = [
  */
 const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
+
+const landscape = window.screen.orientation.type.includes("landscape");
+
 const maxNumberOfColumns = 8;
-const maxColumnWidth = windowWidth / maxNumberOfColumns;
+const maxColumnWidth =
+  landscape && isMobile
+    ? (windowWidth / maxNumberOfColumns) * 0.5
+    : windowWidth / maxNumberOfColumns;
+
+const standardCardWidth = 120;
+const standardCardHeight = 180;
 
 export const CARD_DIMENSIONS = {
-  width: windowWidth * 0.1 > 100 ? 100 : windowWidth * 0.1,
-  height: windowWidth * 0.1 * 1.5 > 150 ? 150 : windowWidth * 0.1 * 1.5,
+  width:
+    maxColumnWidth > standardCardWidth ? standardCardWidth : maxColumnWidth,
+  height:
+    maxColumnWidth * 1.5 > standardCardHeight
+      ? standardCardHeight
+      : maxColumnWidth * 1.5,
 };
 
 /**
  * Offsets for card positions
  */
-console.log(maxColumnWidth, CARD_DIMENSIONS.width);
 
 const PILE_OFFSET =
-  CARD_DIMENSIONS.width < 100
-    ? CARD_DIMENSIONS.width * 1.1
+  CARD_DIMENSIONS.width < standardCardWidth
+    ? landscape
+      ? CARD_DIMENSIONS.width * 1.5
+      : CARD_DIMENSIONS.width * 1
     : maxColumnWidth > CARD_DIMENSIONS.width
-    ? maxColumnWidth - CARD_DIMENSIONS.width / 2
+    ? CARD_DIMENSIONS.width * 1.1
     : CARD_DIMENSIONS.width;
 
 const LEFT_OFFSET =
-  CARD_DIMENSIONS.width < 100
-    ? 0
+  CARD_DIMENSIONS.width < standardCardWidth
+    ? landscape
+      ? maxColumnWidth
+      : maxColumnWidth / 2
     : (windowWidth - PILE_OFFSET * maxNumberOfColumns) / 2 -
       CARD_DIMENSIONS.width / 2;
 
 /**
  * Positions of piles on screen
  */
-const tableau_start_x = CARD_DIMENSIONS.width + LEFT_OFFSET;
+const tableau_start_x = LEFT_OFFSET;
 const tableau_start_y =
   windowHeight > windowWidth
-    ? CARD_DIMENSIONS.height * 3.5
-    : CARD_DIMENSIONS.height * 2.5;
-const freecell_start_x = CARD_DIMENSIONS.width + LEFT_OFFSET;
+    ? CARD_DIMENSIONS.height * 3.2
+    : CARD_DIMENSIONS.height * 2.2;
+const freecell_start_x = LEFT_OFFSET;
 const freecell_start_y =
   windowHeight > windowWidth
     ? CARD_DIMENSIONS.height * 2
@@ -175,7 +193,7 @@ export const NUM_CARDS = 52;
 export const NUM_SUITS = 4;
 export const NUM_VALUES = 13;
 
-export const SPRITE_CARD_WIDTH = 14;
-export const CARD_BACK_INDEX = 27;
+export const SPRITE_CARD_WIDTH = 79 * 4;
+export const CARD_BACK_INDEX = 54;
 export const STACK_OFFSET = CARD_DIMENSIONS.height * 0.25;
 export const STACK_DRAG_OFFSET = 30;

@@ -1,10 +1,16 @@
-export const images = [{ file: "/img/background.png", key: "img_background" }];
+export const images = [
+  { file: "/img/background.png", key: "img_background" },
+  {
+    file: "/img/fabricbg.png",
+    key: "img_fabricbg",
+  },
+];
 
 export const spritesheets = [
   {
-    file: "/img/cards.png",
-    frameHeight: 60,
-    frameWidth: 42,
+    file: "/img/paris.png",
+    frameHeight: 123 * 4,
+    frameWidth: 79 * 4,
     key: "img_cards",
   },
 ];

@@ -1,27 +1,14 @@
 import React from "react";
-import config_freecell from "@games/freecell/main";
-import GameLoader from "@components/Game";
+import dynamic from "next/dynamic";
+const GameLoader = dynamic(() => import("@components/Game"), { ssr: false });
 import { ContentLoader, FreecellContent } from "@components/Content";
 import { Metadata } from "next";
+import { IGameType } from "@/interfaces/game-types";
 
-export default function FreecellPage({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
-  let config;
-  switch (searchParams.variant) {
-    case "freecell":
-      config = config_freecell;
-      break;
-    default:
-      config = config_freecell;
-      break;
-  }
-
+export default function FreecellPage() {
   return (
     <>
-      <GameLoader config={config} />
+      <GameLoader name={IGameType.FreeCell} />
       <ContentLoader>
         <FreecellContent />
       </ContentLoader>

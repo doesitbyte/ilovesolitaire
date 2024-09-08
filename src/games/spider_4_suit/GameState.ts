@@ -68,9 +68,19 @@ export default class GameState extends Phaser.Scene {
     this.moves = [];
 
     // Add background
-    this.add
-      .image(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, "img_background")
-      .setDisplaySize(window.innerWidth, window.innerHeight);
+    const greenOverlay = this.add.graphics();
+    greenOverlay.fillStyle(0x245324); // Green color with 20% opacity
+    greenOverlay.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    const background = this.add.tileSprite(
+      0,
+      0,
+      window.innerWidth,
+      window.innerHeight,
+      "img_fabricbg"
+    );
+
+    // Set the origin to the top-left corner
+    background.setOrigin(0);
 
     // Add deck
     this.deck = new Deck(this, "easy");

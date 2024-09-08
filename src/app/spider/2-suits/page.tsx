@@ -8,7 +8,7 @@ import { IGameType } from "@/interfaces/game-types";
 export default function SpiderPage() {
   return (
     <>
-      <GameLoader name={IGameType.Spider1Suit} />
+      <GameLoader name={IGameType.Spider2Suits} />
       <ContentLoader>
         <SpiderContent />
       </ContentLoader>
