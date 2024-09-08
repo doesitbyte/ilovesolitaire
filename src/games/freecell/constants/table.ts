@@ -193,7 +193,7 @@ export const NUM_CARDS = 52;
 export const NUM_SUITS = 4;
 export const NUM_VALUES = 13;
 
-export const SPRITE_CARD_WIDTH = 79 * 4;
+export const SPRITE_CARD_WIDTH = 79;
 export const CARD_BACK_INDEX = 54;
 export const STACK_OFFSET = CARD_DIMENSIONS.height * 0.25;
 export const STACK_DRAG_OFFSET = 30;
