@@ -10,7 +10,7 @@ const config: Phaser.Types.Core.GameConfig = {
   backgroundColor: "#000",
   parent: "game-container",
   scene: [PreInitState, InitState, GameState],
-  type: Phaser.AUTO,
+  type: Phaser.WEBGL,
   roundPixels: true,
 };
 
