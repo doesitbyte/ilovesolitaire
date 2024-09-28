@@ -8,9 +8,9 @@ export const images = [
 
 export const spritesheets = [
   {
-    file: "/img/paris2.png",
-    frameHeight: 123,
-    frameWidth: 79,
+    file: "/img/paris-resized.png",
+    frameHeight: 180,
+    frameWidth: 120,
     key: "img_cards",
   },
 ];

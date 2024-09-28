@@ -24,11 +24,8 @@ export class Pile extends Phaser.GameObjects.Zone {
     const position = PILE_POSITIONS[this.pileId];
 
     // Make zone
-    this.setPosition(position.x + addWidth / 2, position.y + addHeight / 2);
-    this.setSize(
-      CARD_DIMENSIONS.width + addWidth,
-      CARD_DIMENSIONS.height + addHeight
-    );
+    this.setPosition(position.x, position.y);
+    this.setSize(CARD_DIMENSIONS.width, CARD_DIMENSIONS.height);
 
     const zone = this.setRectangleDropZone(this.width, this.height);
     zone.setName(this.pileId);
@@ -39,8 +36,8 @@ export class Pile extends Phaser.GameObjects.Zone {
         .graphics()
         .lineStyle(1, 0xffffff)
         .strokeRect(
-          this.x - this.width / 2,
-          this.y - this.height / 2,
+          this.x,
+          this.y,
           CARD_DIMENSIONS.width,
           CARD_DIMENSIONS.height
         );

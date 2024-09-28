@@ -5,7 +5,6 @@ import { SUIT_IMAGE_INDEX, Suit, SuitColor } from "./constants/deck";
 import {
   CARD_BACK_INDEX,
   STACK_OFFSET,
-  SPRITE_CARD_WIDTH,
   FOUNDATION_PILES,
   PileId,
   PILE_POSITIONS,
@@ -35,7 +34,9 @@ export default class Card extends Phaser.GameObjects.Sprite {
         : SuitColor.Black;
 
     // Width and Height
-    this.setDisplaySize(CARD_DIMENSIONS.width, CARD_DIMENSIONS.height);
+    // this.setDisplaySize(CARD_DIMENSIONS.width, CARD_DIMENSIONS.height);
+    this.setScale(CARD_DIMENSIONS.width / 120);
+    this.setOrigin(0, 0);
 
     // Click event
     this.setInteractive();

@@ -61,62 +61,57 @@ export const FREECELL_PILES = [
  * Card dimensions
  */
 const windowWidth = window.innerWidth;
-const windowHeight = window.innerHeight;
 
 const landscape = window.screen.orientation.type.includes("landscape");
 
 const maxNumberOfColumns = 8;
-const maxColumnWidth =
-  landscape && isMobile
-    ? (windowWidth / maxNumberOfColumns) * 0.5
-    : windowWidth / maxNumberOfColumns;
+const desktopMaxWidth = 120;
+const desktopMaxHeight = 180;
 
-const standardCardWidth = 120;
-const standardCardHeight = 180;
+let cardWidth: number;
+let cardHeight: number;
+
+if (isMobile) {
+  if (landscape) {
+    cardWidth = (windowWidth * 0.5) / maxNumberOfColumns;
+  } else {
+    cardWidth = (windowWidth * 0.95) / maxNumberOfColumns; // Use 95% of screen width to avoid overflow
+  }
+  cardHeight = cardWidth * 1.5;
+} else {
+  cardWidth = desktopMaxWidth;
+  cardHeight = desktopMaxHeight;
+}
 
 export const CARD_DIMENSIONS = {
-  width:
-    maxColumnWidth > standardCardWidth ? standardCardWidth : maxColumnWidth,
-  height:
-    maxColumnWidth * 1.5 > standardCardHeight
-      ? standardCardHeight
-      : maxColumnWidth * 1.5,
+  width: cardWidth,
+  height: cardHeight,
 };
 
 /**
  * Offsets for card positions
  */
 
-const PILE_OFFSET =
-  CARD_DIMENSIONS.width < standardCardWidth
-    ? landscape
-      ? CARD_DIMENSIONS.width * 1.5
-      : CARD_DIMENSIONS.width * 1
-    : maxColumnWidth > CARD_DIMENSIONS.width
-    ? CARD_DIMENSIONS.width * 1.1
-    : CARD_DIMENSIONS.width;
+const PILE_OFFSET = cardWidth * 1.05; // Reduced slightly to prevent overflow
 
-const LEFT_OFFSET =
-  CARD_DIMENSIONS.width < standardCardWidth
-    ? landscape
-      ? maxColumnWidth
-      : maxColumnWidth / 2
-    : (windowWidth - PILE_OFFSET * maxNumberOfColumns) / 2 -
-      CARD_DIMENSIONS.width / 2;
+const LEFT_OFFSET = (windowWidth - PILE_OFFSET * (maxNumberOfColumns - 1)) / 2;
 
 /**
  * Positions of piles on screen
  */
-const tableau_start_x = LEFT_OFFSET;
-const tableau_start_y =
-  windowHeight > windowWidth
-    ? CARD_DIMENSIONS.height * 3.2
-    : CARD_DIMENSIONS.height * 2.2;
-const freecell_start_x = LEFT_OFFSET;
-const freecell_start_y =
-  windowHeight > windowWidth
-    ? CARD_DIMENSIONS.height * 2
-    : CARD_DIMENSIONS.height * 1;
+const tableau_start_x = isMobile && !landscape ? 0 : LEFT_OFFSET;
+const tableau_start_y = isMobile
+  ? landscape
+    ? cardHeight * 1.2
+    : cardHeight * 2.2
+  : cardHeight * 1.7;
+const freecell_start_x = isMobile && !landscape ? 0 : LEFT_OFFSET;
+const freecell_start_y = isMobile
+  ? landscape
+    ? cardHeight * 0.2
+    : cardHeight * 1
+  : cardHeight * 0.5;
+
 export const PILE_POSITIONS: Record<PileId, Phaser.Math.Vector2> = {
   [PileId.FreeCell1]: new Phaser.Math.Vector2(
     freecell_start_x,
@@ -193,7 +188,6 @@ export const NUM_CARDS = 52;
 export const NUM_SUITS = 4;
 export const NUM_VALUES = 13;
 
-export const SPRITE_CARD_WIDTH = 79;
 export const CARD_BACK_INDEX = 54;
 export const STACK_OFFSET = CARD_DIMENSIONS.height * 0.25;
 export const STACK_DRAG_OFFSET = 30;
