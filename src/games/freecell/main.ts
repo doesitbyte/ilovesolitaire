@@ -10,6 +10,9 @@ const config: Phaser.Types.Core.GameConfig = {
   backgroundColor: "#000",
   parent: "game-container",
   scene: [PreInitState, InitState, GameState],
+  scale: {
+    mode: Phaser.Scale.ScaleModes.RESIZE,
+  },
   type: Phaser.WEBGL,
   roundPixels: true,
 };
