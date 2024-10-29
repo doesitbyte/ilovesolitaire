@@ -70,12 +70,17 @@ export default class GameState extends Phaser.Scene {
     // Create a graphics object for the green overlay
     const greenOverlay = this.add.graphics();
     greenOverlay.fillStyle(0x245324); // Green color with 20% opacity
-    greenOverlay.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    greenOverlay.fillRect(
+      0,
+      0,
+      this.cameras.main.width,
+      this.cameras.main.height
+    );
     const background = this.add.tileSprite(
       0,
       0,
-      window.innerWidth,
-      window.innerHeight,
+      this.cameras.main.width,
+      this.cameras.main.height,
       "img_fabricbg"
     );
 

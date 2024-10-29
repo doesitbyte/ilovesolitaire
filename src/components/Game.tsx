@@ -67,10 +67,10 @@ const GameLoader: React.FC<GameProps> = ({ name }) => {
     // };
 
     config.scale = {
-      mode: Phaser.Scale.RESIZE,
-      autoCenter: Phaser.Scale.CENTER_BOTH,
+      mode: Phaser.Scale.ScaleModes.RESIZE,
+      // autoCenter: Phaser.Scale.CENTER_BOTH,
       // width: window.innerWidth,
-      height: window.innerHeight,
+      // height: window.innerHeight,
     };
 
     const game = new Phaser.Game(config);
@@ -108,7 +108,7 @@ const GameLoader: React.FC<GameProps> = ({ name }) => {
         }
       />
       <div
-        className="h-full w-full flex justify-center items-center bg-red-100"
+        className="h-screen w-full flex justify-center items-center bg-red-100"
         id="game-container"
       ></div>
     </>

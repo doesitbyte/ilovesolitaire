@@ -17,7 +17,7 @@ export default function SpiderPage() {
 }
 
 export const metadata: Metadata = {
-  title: "Play Spider Solitaire Online - iLoveSolitaire",
+  title: "Play Spider Solitaire (4 Suits) Online - iLoveSolitaire",
   description:
-    "Play Spider Solitaire with Four, Two, and One Suit options for free on your PC and mobile in full screen. No download or registration required.",
+    "Play Spider Solitaire (4 Suits) for free on your PC and mobile in full screen. No download or registration required.",
 };
