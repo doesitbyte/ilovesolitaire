@@ -124,9 +124,9 @@ if (isMobilePortrait) {
   tableau_start_y = cardHeight * 1.9;
 } else {
   freecell_start_x = LEFT_OFFSET;
-  freecell_start_y = cardHeight * 0.7;
+  freecell_start_y = cardHeight * 0.8;
   tableau_start_x = LEFT_OFFSET;
-  tableau_start_y = cardHeight * 1.8;
+  tableau_start_y = cardHeight * 1.9;
 }
 
 export const PILE_POSITIONS: Record<PileId, Phaser.Math.Vector2> = {
