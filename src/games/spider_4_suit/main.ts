@@ -15,10 +15,9 @@ const config: Phaser.Types.Core.GameConfig = {
   parent: "game-container",
   scene: [PreInitState, InitState, GameState],
   type: Phaser.AUTO,
-  width: SCREEN_WIDTH,
-  scale: {
-    mode: Phaser.Scale.FIT,
-  },
+  roundPixels: true,
+  // pixelArt: true,
+  mipmapFilter: "LINEAR_MIPMAP_LINEAR",
 };
 
 export default config;

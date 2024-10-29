@@ -104,6 +104,8 @@ export default class GameState extends Phaser.Scene {
   }
 
   public createZones(): void {
+    let lastClickTime = 0;
+
     Object.values(PileId).forEach((pileId) => {
       const pile = new Pile(this, pileId);
       this.add.existing(pile);
@@ -111,13 +113,18 @@ export default class GameState extends Phaser.Scene {
       // Draw zone
       if (pile.pileId === PileId.Stock) {
         pile.on(
-          "pointerdown",
+          "pointerup",
           () => {
-            this.drawCard();
+            const currentTime = Date.now();
+            if (currentTime - lastClickTime > 200) {
+              // 200 ms throttle
+              this.drawCard();
+              lastClickTime = currentTime;
+            }
           },
           this
         );
-        pile.setDepth(99);
+        pile.setDepth(10000);
       }
     });
   }
@@ -294,7 +301,7 @@ export default class GameState extends Phaser.Scene {
     this.difficultyMenu.destroy();
     this.clearGame();
     this.deck = new Deck(this, difficulty);
-    this.createZones();
+    // this.createZones();
     this.createInputListeners();
     this.createButtons();
     this.createText();
@@ -306,7 +313,7 @@ export default class GameState extends Phaser.Scene {
   }
 
   public createText(): void {
-    this.scoreText = this.add.text(10, 35, `Score: ${this.score}`, {
+    this.scoreText = this.add.text(700, 12, `Score: ${this.score}`, {
       color: "#ffffff",
     });
 

@@ -26,7 +26,7 @@ export default class Card extends Phaser.GameObjects.Sprite {
 
   public constructor(scene: Phaser.Scene, suit: Suit, value: number) {
     // Create sprite
-    super(scene, 0, 0, "img_cards", CARD_BACK_INDEX);
+    super(scene, 0, 0, "img_cards_svg", `card_${CARD_BACK_INDEX}`);
     scene.add.existing(this);
 
     // Suit and Value
@@ -48,7 +48,7 @@ export default class Card extends Phaser.GameObjects.Sprite {
 
     if (this.pile === PileId.Stock || this.pile === PileId.Discard) {
       this.moveTo(
-        PILE_POSITIONS[this.pile].x + position,
+        PILE_POSITIONS[this.pile].x + position / 10,
         PILE_POSITIONS[this.pile].y,
         this.position + 10,
         200
@@ -71,21 +71,33 @@ export default class Card extends Phaser.GameObjects.Sprite {
   }
 
   public flip(scene: Phaser.Scene): void {
-    this.setTexture("img_cards", this.getSpriteIndex(this.suit, this.value));
+    // this.setTexture("img_cards", this.getSpriteIndex(this.suit, this.value));
+    this.setTexture(
+      "img_cards_svg",
+      this.getSpriteFrameName(this.suit, this.value)
+    );
     scene.input.setDraggable(this);
     this.flipped = true;
   }
 
   public flipBack(scene: Phaser.Scene): void {
-    this.setTexture("img_cards", CARD_BACK_INDEX);
+    this.setTexture("img_cards_svg", `card_${CARD_BACK_INDEX}`);
     scene.input.setDraggable(this, false);
     this.flipped = false;
   }
 
-  public getSpriteIndex(suit: Suit, value: number): number {
-    const spriteIndex = 13 * SUIT_IMAGE_INDEX[suit] + (value - 1);
+  // public getSpriteIndex(suit: Suit, value: number): number {
+  //   const spriteIndex = 13 * SUIT_IMAGE_INDEX[suit] + (value - 1);
 
-    return spriteIndex;
+  //   return spriteIndex;
+  // }
+
+  public getSpriteFrameName(suit: Suit, value: number): string {
+    // Calculate the sprite index based on the suit and value
+    const spriteIndex = 13 * SUIT_IMAGE_INDEX[suit] + (value - 1);
+    const frameName = `card_${spriteIndex}`; // Updated to match the frame name format
+
+    return frameName;
   }
 
   public moveTo(

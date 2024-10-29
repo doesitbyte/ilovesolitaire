@@ -61,17 +61,14 @@ const GameLoader: React.FC<GameProps> = ({ name }) => {
       },
     };
 
-    // config.scale = {
-    //   mode: Phaser.Scale.FIT,
-    //   autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
-    // };
-
     config.scale = {
       mode: Phaser.Scale.ScaleModes.RESIZE,
       // autoCenter: Phaser.Scale.CENTER_BOTH,
       // width: window.innerWidth,
       // height: window.innerHeight,
     };
+
+    config.type = Phaser.WEBGL;
 
     const game = new Phaser.Game(config);
 

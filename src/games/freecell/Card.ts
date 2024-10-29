@@ -23,7 +23,7 @@ export default class Card extends Phaser.GameObjects.Sprite {
 
   public constructor(scene: Phaser.Scene, suit: Suit, value: number) {
     // Create sprite
-    super(scene, 0, 0, "img_cards", CARD_BACK_INDEX);
+    super(scene, 0, 0, "img_cards_svg", `card_${CARD_BACK_INDEX}`);
     scene.add.existing(this);
 
     // Suit and Value
@@ -35,11 +35,14 @@ export default class Card extends Phaser.GameObjects.Sprite {
         : SuitColor.Black;
 
     // Width and Height
-    this.setDisplaySize(CARD_DIMENSIONS.width, CARD_DIMENSIONS.height);
 
     // Click event
     this.setInteractive();
-    this.setTexture("img_cards", this.getSpriteIndex(this.suit, this.value));
+    this.setTexture(
+      "img_cards_svg",
+      this.getSpriteFrameName(this.suit, this.value)
+    );
+    this.setDisplaySize(CARD_DIMENSIONS.width, CARD_DIMENSIONS.height);
 
     scene.input.setDraggable(this);
   }
@@ -83,10 +86,18 @@ export default class Card extends Phaser.GameObjects.Sprite {
     this.scene.input.setDraggable(this, false);
   }
 
-  public getSpriteIndex(suit: Suit, value: number): number {
-    const spriteIndex = 13 * SUIT_IMAGE_INDEX[suit] + (value - 1);
+  // public getSpriteIndex(suit: Suit, value: number): number {
+  //   const spriteIndex = 13 * SUIT_IMAGE_INDEX[suit] + (value - 1);
 
-    return spriteIndex;
+  //   return spriteIndex;
+  // }
+
+  public getSpriteFrameName(suit: Suit, value: number): string {
+    // Calculate the sprite index based on the suit and value
+    const spriteIndex = 13 * SUIT_IMAGE_INDEX[suit] + (value - 1);
+    const frameName = `card_${spriteIndex}`; // Updated to match the frame name format
+
+    return frameName;
   }
 
   public moveTo(

@@ -8,7 +8,7 @@ import { IGameType } from "@/interfaces/game-types";
 export default function KlondikePage() {
   return (
     <>
-      <GameLoader name={IGameType.KlondikeTurn1} />
+      <GameLoader name={IGameType.KlondikeTurn3} />
       <ContentLoader>
         <KlondikeContent />
       </ContentLoader>

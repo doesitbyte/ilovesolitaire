@@ -15,6 +15,17 @@ export const spritesheets = [
   },
 ];
 
+export const svgs = [
+  {
+    file: "/img/paris.svg",
+    key: "img_cards_svg",
+    frameHeight: 123,
+    frameWidth: 79,
+    rows: 5,
+    columns: 13,
+  },
+];
+
 export const freecell_difficulties = [
   { file: "/shuffles/freecell.json", key: "freecell" },
 ];

@@ -7,7 +7,10 @@ import {
   images,
   spritesheets,
   freecell_difficulties as difficulties,
+  svgs,
 } from "../assets";
+import { isMobile } from "react-device-detect";
+import { CARD_DIMENSIONS } from "./constants/table";
 
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
   active: false,
@@ -64,6 +67,46 @@ export default class InitState extends Phaser.Scene {
     // Spritesheets
     spritesheets.forEach(({ file, frameHeight, frameWidth, key }) => {
       this.load.spritesheet(key, file, { frameHeight, frameWidth });
+    });
+
+    // SVGs
+    svgs.forEach(({ file, frameHeight, frameWidth, columns, rows, key }) => {
+      const standardCardWidth = 120;
+      const standardCardHeight = 180;
+
+      const scale = standardCardHeight / frameHeight;
+
+      const svgWidth = columns * frameWidth * scale;
+      const svgHeight = rows * frameHeight * scale;
+
+      this.load.svg(key, file, {
+        width: svgWidth,
+        height: svgHeight,
+      });
+
+      this.load.once("complete", () => {
+        const texture = this.textures.get(key);
+        const columns = 13; // Adjust based on the layout of your SVG
+        const rows = 5; // Adjust based on the number of rows in your SVG
+
+        // Loop through rows and columns to add each frame dynamically
+        for (let row = 0; row < rows; row++) {
+          for (let col = 0; col < columns; col++) {
+            const frameName = `card_${row * columns + col}`;
+            const x = col * frameWidth * scale;
+            const y = row * frameHeight * scale;
+
+            texture.add(
+              frameName,
+              0, // x-offset within the texture atlas
+              x,
+              y, // coordinates in the texture
+              frameWidth * scale,
+              frameHeight * scale
+            );
+          }
+        }
+      });
     });
 
     // JSON

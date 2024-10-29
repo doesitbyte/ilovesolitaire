@@ -284,7 +284,7 @@ export default class GameState extends Phaser.Scene {
   }
 
   public createText(): void {
-    this.scoreText = this.add.text(10, 35, `Score: ${this.score}`, {
+    this.scoreText = this.add.text(700, 12, `Score: ${this.score}`, {
       color: "#ffffff",
     });
 
