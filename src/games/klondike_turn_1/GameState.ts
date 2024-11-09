@@ -15,6 +15,8 @@ import {
 import { SUIT_COLOR } from "./constants/deck";
 import { Pile } from "./Pile";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../screen";
+import { createButton } from "../components/button";
+import { createDifficultyMenu } from "../components/menu";
 
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
   active: false,
@@ -194,108 +196,62 @@ export default class GameState extends Phaser.Scene {
   }
 
   public createButtons(): void {
-    // Redeal button
-    this.add.graphics().fillStyle(0xffffff, 1).fillRect(10, 10, 80, 18);
+    const redealButton = createButton({
+      scene: this,
+      text: "Redeal",
+      position: { x: 10, y: 10 },
+      size: { width: 110, height: 25 },
+      onClick: () => {
+        this.clearGame();
+        this.deck.redeal(this);
+        this.winText.setVisible(false);
+        this.score = 0;
+      },
+    });
 
-    this.add
-      .text(12, 12, "Redeal", { color: "#000" })
-      .setInteractive()
-      .on(
-        "pointerdown",
-        () => {
-          this.clearGame();
-          this.deck.redeal(this);
-          this.winText.setVisible(false);
-          this.score = 0;
-        },
-        this
-      );
+    const newDealButton = createButton({
+      scene: this,
+      text: "New Deal",
+      position: { x: 130, y: 10 },
+      size: { width: 110, height: 25 },
+      onClick: () => {
+        this.showDifficultyMenu();
+      },
+    });
 
-    // New deal button
-    this.add.graphics().fillStyle(0xffffff, 1).fillRect(100, 10, 80, 18);
-
-    this.add
-      .text(102, 12, "New Deal", { color: "#000" })
-      .setInteractive()
-      .on(
-        "pointerdown",
-        () => {
-          this.showDifficultyMenu();
-          // this.deck.shuffle(this.deck.cards);
-          // this.deck.deal(this);
-          // this.winText.setVisible(false);
-          // this.score = 0;
-        },
-        this
-      );
-
-    // Undo button
-    this.add.graphics().fillStyle(0xffffff, 1).fillRect(190, 10, 80, 18);
-
-    this.add
-      .text(192, 12, "Undo", { color: "#000" })
-      .setInteractive()
-      .on(
-        "pointerdown",
-        () => {
-          const lastMoves = this.moves.pop();
-          if (!lastMoves) return;
-          for (let i = 0; i < lastMoves.length || 0; i++) {
-            const currentMove = lastMoves[i];
-            if (currentMove.type === MoveType.flip) {
-              if (currentMove.face === true) currentMove.card.flipBack(this);
-              else currentMove.card.flip(this);
-            } else {
-              currentMove.card.reposition(
-                currentMove.startPile,
-                currentMove.startPosition
-              );
-            }
+    const undoButton = createButton({
+      scene: this,
+      text: "Undo",
+      position: { x: 250, y: 10 },
+      size: { width: 110, height: 25 },
+      onClick: () => {
+        const lastMoves = this.moves.pop();
+        if (!lastMoves) return;
+        for (let i = 0; i < lastMoves.length || 0; i++) {
+          const currentMove = lastMoves[i];
+          if (currentMove.type === MoveType.flip) {
+            if (currentMove.face === true) currentMove.card.flipBack(this);
+            else currentMove.card.flip(this);
+          } else {
+            currentMove.card.reposition(
+              currentMove.startPile,
+              currentMove.startPosition
+            );
           }
-        },
-        this
-      );
+        }
+      },
+    });
   }
 
   public showDifficultyMenu(): void {
     if (this.difficultyMenu) {
       this.difficultyMenu.destroy();
     }
-    const rect = this.add.graphics();
-    rect.fillStyle(0xffffff, 1);
-    rect.fillRect(SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 100, 200, 200);
-    const easy = this.add
-      .text(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 50, "Easy", {
-        fontSize: "32px",
-        color: "#000",
-      })
-      .setOrigin(0.5, 0.5);
-    easy.setInteractive().on("pointerdown", () => {
-      this.dealNewDeck("easy");
-      this.hideDifficultyMenu();
+    this.difficultyMenu = createDifficultyMenu({
+      scene: this,
+      position: { x: SCREEN_WIDTH / 2, y: SCREEN_HEIGHT / 2 },
+      onSelect: (difficulty) => this.dealNewDeck(difficulty),
     });
-    const medium = this.add
-      .text(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, "Medium", {
-        fontSize: "32px",
-        color: "#000",
-      })
-      .setOrigin(0.5, 0.5);
-    medium.setInteractive().on("pointerdown", () => {
-      this.dealNewDeck("medium");
-      this.hideDifficultyMenu();
-    });
-    const hard = this.add
-      .text(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 50, "Hard", {
-        fontSize: "32px",
-        color: "#000",
-      })
-      .setOrigin(0.5, 0.5);
-    hard.setInteractive().on("pointerdown", () => {
-      this.dealNewDeck("hard");
-      this.hideDifficultyMenu();
-    });
-    this.difficultyMenu = this.add.container(0, 0, [rect, easy, medium, hard]);
-    this.difficultyMenu.setDepth(2000);
   }
 
   public hideDifficultyMenu(): void {

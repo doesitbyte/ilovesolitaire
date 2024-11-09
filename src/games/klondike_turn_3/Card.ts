@@ -35,7 +35,7 @@ export default class Card extends Phaser.GameObjects.Sprite {
     this.value = value;
 
     // Width and Height
-    this.setDisplaySize(CARD_DIMENSIONS.width, CARD_DIMENSIONS.height);
+    // this.setDisplaySize(CARD_DIMENSIONS.width, CARD_DIMENSIONS.height);
 
     // Click event
     this.setInteractive();

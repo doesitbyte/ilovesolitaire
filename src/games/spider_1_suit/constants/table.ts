@@ -77,7 +77,7 @@ let cardWidth: number;
 let cardHeight: number;
 
 if (isMobilePortrait) {
-  cardWidth = (windowWidth * 0.95) / maxNumberOfColumns; // Use 95% of screen width to avoid overflow
+  cardWidth = (windowWidth * 0.99) / maxNumberOfColumns; // Use 95% of screen width to avoid overflow
   cardHeight = cardWidth * 1.5;
 } else if (isMobileLandscape) {
   cardWidth = (windowWidth * 0.8) / maxNumberOfColumns; // Use 95% of screen width to avoid overflow
@@ -99,7 +99,7 @@ export const CARD_DIMENSIONS = {
  * Offsets for card positions
  */
 
-const PILE_OFFSET = cardWidth * 1.05; // Reduced slightly to prevent overflow
+const PILE_OFFSET = cardWidth * 0.99; // Reduced slightly to prevent overflow
 
 const LEFT_OFFSET = (windowWidth - PILE_OFFSET * (maxNumberOfColumns - 1)) / 2;
 

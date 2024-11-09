@@ -9,8 +9,8 @@ import {
   freecell_difficulties as difficulties,
   svgs,
 } from "../assets";
-import { isMobile } from "react-device-detect";
 import { CARD_DIMENSIONS } from "./constants/table";
+import { isMobile } from "react-device-detect";
 
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
   active: false,
@@ -74,7 +74,7 @@ export default class InitState extends Phaser.Scene {
       const standardCardWidth = 120;
       const standardCardHeight = 180;
 
-      const scale = standardCardHeight / frameHeight;
+      const scale = CARD_DIMENSIONS.height / frameHeight;
 
       const svgWidth = columns * frameWidth * scale;
       const svgHeight = rows * frameHeight * scale;

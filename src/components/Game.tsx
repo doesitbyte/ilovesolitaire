@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import Phaser, { Game } from "phaser";
+import * as Phaser from "phaser";
 import Tabs from "./Tabs";
 import { useRouter, usePathname } from "next/navigation";
 import { IGameType } from "@/interfaces/game-types";
@@ -56,7 +56,7 @@ const GameLoader: React.FC<GameProps> = ({ name }) => {
 
   useEffect(() => {
     config.callbacks = {
-      postBoot: (game: Game) => {
+      postBoot: (game: Phaser.Game) => {
         if (game.input.mouse) game.input.mouse.preventDefaultWheel = false;
       },
     };
@@ -68,7 +68,7 @@ const GameLoader: React.FC<GameProps> = ({ name }) => {
       // height: window.innerHeight,
     };
 
-    config.type = Phaser.WEBGL;
+    config.type = Phaser.AUTO;
 
     const game = new Phaser.Game(config);
 

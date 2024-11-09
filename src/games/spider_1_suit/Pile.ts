@@ -4,6 +4,7 @@ import {
   PileId,
   PILE_POSITIONS,
   TABLEAU_PILES,
+  FOUNDATION_PILES,
 } from "./constants/table";
 
 export class Pile extends Phaser.GameObjects.Zone {
@@ -34,7 +35,7 @@ export class Pile extends Phaser.GameObjects.Zone {
     zone.setName(this.pileId);
 
     // Drop zone visual
-    if (this.pileId !== PileId.None) {
+    if (FOUNDATION_PILES.includes(this.pileId)) {
       this.scene.add
         .graphics()
         .lineStyle(1, 0xffffff)
