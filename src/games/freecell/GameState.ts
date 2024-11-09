@@ -17,6 +17,7 @@ import { SUIT_COLOR } from "./constants/deck";
 import { Pile } from "./Pile";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../screen";
 import { createButton } from "../components/button";
+import { createDifficultyMenu } from "../components/menu";
 
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
   active: false,
