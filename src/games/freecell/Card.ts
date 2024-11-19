@@ -42,6 +42,7 @@ export default class Card extends Phaser.GameObjects.Sprite {
       "img_cards_svg",
       this.getSpriteFrameName(this.suit, this.value)
     );
+    this.setDisplaySize(CARD_DIMENSIONS.width, CARD_DIMENSIONS.height);
 
     scene.input.setDraggable(this);
   }

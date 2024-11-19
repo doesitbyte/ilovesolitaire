@@ -17,7 +17,7 @@ export default function KlondikePage() {
 }
 
 export const metadata: Metadata = {
-  title: "Play Klondike Solitaire (Turn 3) Online - iLoveSolitaire",
+  title: "Play Klondike Solitaire (Turn 3) Online - I Love Solitaire",
   description:
     "Play Klondike Solitaire (Turn 3) for free on your PC and mobile in full screen. No download or registration required.",
 };

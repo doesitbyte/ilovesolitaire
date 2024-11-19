@@ -58,7 +58,7 @@ export const HomeContent = () => {
       <h3>
         <strong>Rules</strong>
       </h3>
-      <ul>
+      <ul className="list-disc">
         <li>
           Aces need to be at the bottom of the pile in the <em>Foundation</em>{" "}
           area.
@@ -71,7 +71,7 @@ export const HomeContent = () => {
       <p>
         <strong>Foundation Area:</strong>
       </p>
-      <ul>
+      <ul className="list-disc">
         <li>
           In the <em>Foundation</em> area, each pile needs to have the same suit
           of cards and each pile needs to begin with an Ace and end with a King.
@@ -86,7 +86,7 @@ export const HomeContent = () => {
       <p>
         <strong>Tableau Area:</strong>
       </p>
-      <ul>
+      <ul className="list-disc">
         <li>
           You can only move the cards facing up in the columns of the{" "}
           <em>Tableau</em> area.
@@ -118,7 +118,7 @@ export const HomeContent = () => {
       <p>
         <strong>Stockpile:</strong>
       </p>
-      <ul>
+      <ul className="list-disc">
         <li>
           Use the Stockpile only when no suitable cards are available to move in
           the column of the <em>Tableau</em> area.
@@ -148,7 +148,7 @@ export const HomeContent = () => {
       <p>
         <strong>Discard Pile:</strong>
       </p>
-      <ul>
+      <ul className="list-disc">
         <li>
           You can only move the top (face up) card from the Discard pile into a
           column in the <em>Tableau</em> area or a pile in the{" "}
@@ -214,7 +214,7 @@ export const KlondikeContent = () => {
       <h3>
         <strong>Rules</strong>
       </h3>
-      <ul>
+      <ul className="list-disc">
         <li>
           In the <em>Foundation</em> area, Aces need to be the first card to
           start a suit pile. That means they must be at the bottom of the pile
@@ -228,7 +228,7 @@ export const KlondikeContent = () => {
       <p>
         <strong>Foundation:</strong>
       </p>
-      <ul>
+      <ul className="list-disc">
         <li>
           Each pile must have the same suit of cards, with Ace cards at the
           bottom and Kings at the top.
@@ -252,7 +252,7 @@ export const KlondikeContent = () => {
         Klondike offers two variations to how you can use the <em>Stockpile</em>
         :
       </p>
-      <ul>
+      <ul className="list-disc">
         <li>
           <strong>Turn 1</strong> - You can draw only <strong>one</strong> card
           at a time and put it into the <em>Discard</em> pile - helpful for
@@ -288,7 +288,7 @@ export const KlondikeContent = () => {
       <p>
         <strong>Tableau:</strong>
       </p>
-      <ul>
+      <ul className="list-disc">
         <li>
           You can start the game by moving the cards facing up to other columns.
           And when you get Aces facing up, you can move them to the Foundation
@@ -376,7 +376,7 @@ export const FreecellContent = () => {
       <h3>
         <strong>Rules</strong>
       </h3>
-      <ul>
+      <ul className="list-disc">
         <li>
           In FreeCell, the stacks you create in the columns of the{" "}
           <em>Tableau</em> area must be in alternating colors (black and red)
@@ -601,10 +601,8 @@ export const ContentLoader: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <div className="w-full flex justify-center items-center mt-6">
-      <div className="bg-white p-4 md:w-4/5 rounded-2xl shadow-2xl">
-        {children}
-      </div>
+    <div className="w-full flex justify-center items-center mt-6 bg-[#f7f8f9]">
+      <div className="bg-white p-4 md:w-4/5 rounded-2xl">{children}</div>
     </div>
   );
 };

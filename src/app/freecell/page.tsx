@@ -17,7 +17,7 @@ export default function FreecellPage() {
 }
 
 export const metadata: Metadata = {
-  title: "Play FreeCell Solitaire Online - iLoveSolitaire",
+  title: "Play FreeCell Solitaire Online - I Love Solitaire",
   description:
     "Play FreeCell Solitaire for free on your PC and mobile. No download or registration required.",
 };

@@ -51,6 +51,7 @@ const configs = [
 const GameLoader: React.FC<GameProps> = ({ name }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const [gameLoaded, setGameLoaded] = React.useState(false);
 
   const config = configs.find((c) => c.title === name)?.config;
 
@@ -71,9 +72,11 @@ const GameLoader: React.FC<GameProps> = ({ name }) => {
     config.type = Phaser.AUTO;
 
     const game = new Phaser.Game(config);
+    setGameLoaded(true);
 
     return () => {
       game.destroy(true);
+      setGameLoaded(false);
     };
   }, [config]);
 
@@ -105,7 +108,7 @@ const GameLoader: React.FC<GameProps> = ({ name }) => {
         }
       />
       <div
-        className="h-screen w-full flex justify-center items-center bg-red-100"
+        className="h-screen w-full flex justify-center items-center"
         id="game-container"
       ></div>
     </>

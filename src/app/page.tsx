@@ -17,7 +17,7 @@ export default function Home() {
 }
 
 export const metadata: Metadata = {
-  title: "Play Solitaire Online - iLoveSolitaire",
+  title: "Play Solitaire Online - I Love Solitaire",
   description:
     "Play classic Solitaire games such as Klondike, Spider, and FreeCell for free on your PC and mobile in full screen. No download or registration required.",
 };
