@@ -13,9 +13,9 @@ const config: Phaser.Types.Core.GameConfig = {
   parent: "game-container",
   scene: [PreInitState, InitState, GameState],
   type: Phaser.AUTO,
-  // pixelArt: true,
+  pixelArt: true,
   mipmapFilter: "LINEAR",
-  // roundPixels: true,
+  roundPixels: true,
 };
 
 export default config;

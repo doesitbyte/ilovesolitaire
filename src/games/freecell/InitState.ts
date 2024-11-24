@@ -74,7 +74,7 @@ export default class InitState extends Phaser.Scene {
       const standardCardWidth = 120;
       const standardCardHeight = 180;
 
-      const scale = standardCardHeight / frameHeight;
+      const scale = CARD_DIMENSIONS.height / frameHeight;
 
       const svgWidth = columns * frameWidth * scale;
       const svgHeight = rows * frameHeight * scale;
