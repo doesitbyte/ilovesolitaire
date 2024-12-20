@@ -21,7 +21,7 @@ const Header: React.FC = () => {
           <Image src="/img/ILS.png" alt="logo" height={24} width={100} />
         </Link>
         <div className="hidden md:flex space-x-4">
-          <div className="relative group">
+          {/* <div className="relative group">
             <button className=" focus:outline-none">Klondike Solitaire</button>
             <div className="absolute hidden group-hover:block bg-white rounded shadow-lg">
               <Link
@@ -57,7 +57,13 @@ const Header: React.FC = () => {
                 Spider 4 Suits
               </Link>
             </div>
-          </div>
+          </div> */}
+          <Link href="/klondike" className="">
+            Klondike Solitaire
+          </Link>
+          <Link href="/spider" className="">
+            Spider Solitaire
+          </Link>
           <Link href="/freecell" className="">
             Freecell Solitaire
           </Link>
@@ -71,8 +77,11 @@ const Header: React.FC = () => {
       </div>
       {isOpen && (
         <div className="md:hidden">
-          <div className="flex gap-4 px-2 pt-2 pb-3 space-y-1">
-            <div className="relative group">
+          <div
+            className="flex gap-4 text-black"
+            onClick={() => setIsOpen(false)}
+          >
+            {/* <div className="relative group">
               <button
                 onClick={() => {
                   setOpenSection((curr) =>
@@ -99,8 +108,8 @@ const Header: React.FC = () => {
                   </Link>
                 </div>
               )}
-            </div>
-            <div className="relative group">
+            </div> */}
+            {/* <div className="relative group">
               <button
                 onClick={() => {
                   setOpenSection((curr) => (curr === "spider" ? "" : "spider"));
@@ -131,11 +140,14 @@ const Header: React.FC = () => {
                   </Link>
                 </div>
               )}
-            </div>
-            <Link
-              href="/freecell"
-              className="block px-3 py-2 rounded-md text-base font-medium "
-            >
+            </div> */}
+            <Link className="text-black no-underline py-3" href="/klondike">
+              Klondike Solitaire
+            </Link>
+            <Link className="text-black no-underline py-3" href="/spider">
+              Spider Solitaire
+            </Link>
+            <Link className="text-black no-underline py-3" href="/freecell">
               Freecell Solitaire
             </Link>
           </div>

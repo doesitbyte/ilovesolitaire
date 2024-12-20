@@ -470,12 +470,22 @@ export const SpiderContent = () => {
       </p>
       <p>
         You can choose to play Spider Solitaire in three options -{" "}
-        <strong>1 suit</strong>, <strong>2 suits</strong>, and{" "}
-        <strong>4 suits</strong>. Beginners can choose the 1 suit option since
-        it&apos;s easiest to win and suitable for those who&apos;ve never played
-        the game. Those with Intermediate players can choose the 2 suits option
-        for medium difficulty. Meanwhile, Advanced players can select the 4
-        suits option for the most challenging game.
+        <strong>
+          <a href="https://ilovesolitaire.com/spider/">1 suit</a>
+        </strong>
+        ,{" "}
+        <strong>
+          <a href="https://ilovesolitaire.com/spider/2-suits/">2 suit</a>
+        </strong>
+        , and{" "}
+        <strong>
+          <a href="https://ilovesolitaire.com/spider/4-suits/">4 suit</a>
+        </strong>
+        . Beginners can choose the 1 suit option since it&apos;s easiest to win
+        and suitable for those who&apos;ve never played the game. Those with
+        Intermediate players can choose the 2 suits option for medium
+        difficulty. Meanwhile, Advanced players can select the 4 suits option
+        for the most challenging game.
       </p>
       <h3>
         <strong>Objective</strong>
@@ -519,16 +529,26 @@ export const SpiderContent = () => {
         need to use the remaining 50 cards as a Stockpile.
       </p>
       <p>
-        In the Spider <strong>1 suit</strong> option, you can play with 104
-        cards from any of the four suits - Hearts, Clubs, Diamonds, and Spades.
+        In the Spider{" "}
+        <strong>
+          <a href="https://ilovesolitaire.com/spider/">1 suit</a>
+        </strong>{" "}
+        option, you can play with 104 cards from any of the four suits - Hearts,
+        Clubs, Diamonds, and Spades.
       </p>
       <p>
-        The Spider <strong>2 suits</strong> option requires playing with 104
-        cards from any two of the four suits.
+        The Spider{" "}
+        <strong>
+          <a href="https://ilovesolitaire.com/spider/2-suits/">2 suit</a>
+        </strong>{" "}
+        option requires playing with 104 cards from any two of the four suits.
       </p>
       <p>
-        Finally, the Spider <strong>4 suit</strong> option entails playing 104
-        cards of all four suits.
+        Finally, the Spider{" "}
+        <strong>
+          <a href="https://ilovesolitaire.com/spider/4-suits/">2 suit</a>
+        </strong>{" "}
+        option entails playing 104 cards of all four suits.
       </p>
       <p>
         In all three Spider options, the Stockpile consists of the remaining 50
@@ -570,16 +590,28 @@ export const SpiderContent = () => {
         However, moving Kings to create a stack is a good idea.
       </p>
       <p>
-        - Spider <strong>1 suit</strong>: you can move your card(s) between
-        columns only if they form a descending order. For example, you can place
-        8 of Hearts on top of 9 of Hearts while playing with the Hearts suit.
+        - Spider{" "}
+        <strong>
+          <a href="https://ilovesolitaire.com/spider/">1 suit</a>
+        </strong>
+        : you can move your card(s) between columns only if they form a
+        descending order. For example, you can place 8 of Hearts on top of 9 of
+        Hearts while playing with the Hearts suit.
       </p>
       <p>
-        - Spider <strong>2 suits</strong> and <strong>4 suits:</strong> the
-        stack of cards you want to move must be of the same suit in descending
-        order. Also, you can move the stack of same-suit cards to another column
-        with any suit but to a higher or greater card. For example, you can
-        place a Hearts stack with 2 and Ace of Hearts on top of 3 of Clubs.
+        - Spider{" "}
+        <strong>
+          <a href="https://ilovesolitaire.com/spider/2-suits/">2 suit</a>
+        </strong>{" "}
+        and{" "}
+        <strong>
+          <a href="https://ilovesolitaire.com/spider/4-suits/">4 suit:</a>
+        </strong>{" "}
+        the stack of cards you want to move must be of the same suit in
+        descending order. Also, you can move the stack of same-suit cards to
+        another column with any suit but to a higher or greater card. For
+        example, you can place a Hearts stack with 2 and Ace of Hearts on top of
+        3 of Clubs.
       </p>
       <p>
         However, moving cards of the same suit to a different suit has a
@@ -601,8 +633,8 @@ export const ContentLoader: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <div className="w-full flex justify-center items-center mt-6 bg-[#f7f8f9]">
-      <div className="bg-white p-4 md:w-4/5 rounded-2xl">{children}</div>
+    <div className="w-full flex justify-center items-center my-6 bg-[#f7f8f9]">
+      <div className="bg-white p-4 px-8 md:w-4/5 rounded-2xl">{children}</div>
     </div>
   );
 };

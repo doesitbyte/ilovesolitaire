@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`bg-gray-200 ${inter.className}`}>
+      <body className={`bg-[#f7f8f9] ${inter.className}`}>
         <Header />
         {children}
         <Footer />

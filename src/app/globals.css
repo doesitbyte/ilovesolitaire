@@ -5,3 +5,10 @@
 h1 {
   @apply text-4xl;
 }
+
+@layer base {
+  a {
+    @apply text-blue-900;
+    @apply underline;
+  }
+}
