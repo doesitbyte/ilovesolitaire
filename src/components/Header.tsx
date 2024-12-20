@@ -58,13 +58,13 @@ const Header: React.FC = () => {
               </Link>
             </div>
           </div> */}
-          <Link href="/klondike" className="">
+          <Link className="text-black no-underline" href="/klondike">
             Klondike Solitaire
           </Link>
-          <Link href="/spider" className="">
+          <Link className="text-black no-underline" href="/spider">
             Spider Solitaire
           </Link>
-          <Link href="/freecell" className="">
+          <Link className="text-black no-underline" href="/freecell">
             Freecell Solitaire
           </Link>
         </div>
