@@ -11,7 +11,7 @@ export default class Deck {
     this.cards = [];
 
     // Load the appropriate shuffle based on difficulty
-    const shuffle = this.loadShuffle(scene, difficulty, 0);
+    const shuffle = this.loadShuffle(scene, difficulty);
 
     this.deal(scene, shuffle.deck);
   }
@@ -46,8 +46,12 @@ export default class Deck {
     this.deal(scene, shuffle.deck);
   }
 
-  public loadShuffle(scene: Phaser.Scene, _: string, index?: number): any {
-    const shuffles = scene.cache.json.get("spider_1_suit");
+  public loadShuffle(
+    scene: Phaser.Scene,
+    difficulty: string,
+    index?: number
+  ): any {
+    const shuffles = scene.cache.json.get(difficulty);
 
     let randomIndex;
     if (index) {

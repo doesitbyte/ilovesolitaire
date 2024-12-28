@@ -27,7 +27,18 @@ export const svgs = [
 ];
 
 export const freecell_difficulties = [
-  { file: "/shuffles/freecell.json", key: "freecell" },
+  {
+    file: "/shuffles/freecell/easy.json",
+    key: "easy",
+  },
+  {
+    file: "/shuffles/freecell/medium.json",
+    key: "medium",
+  },
+  {
+    file: "/shuffles/freecell/hard.json",
+    key: "hard",
+  },
 ];
 
 export const klondike_turn_1_difficulties = [
@@ -43,13 +54,46 @@ export const klondike_turn_3_difficulties = [
 ];
 
 export const spider_1_suit_difficulties = [
-  { file: "/shuffles/spider_1_suit.json", key: "spider_1_suit" },
+  {
+    file: "/shuffles/1-suit-spider/easy.json",
+    key: "easy",
+  },
+  {
+    file: "/shuffles/1-suit-spider/medium.json",
+    key: "medium",
+  },
+  {
+    file: "/shuffles/1-suit-spider/hard.json",
+    key: "hard",
+  },
 ];
 
 export const spider_2_suit_difficulties = [
-  { file: "/shuffles/spider_2_suit.json", key: "spider_2_suit" },
+  {
+    file: "/shuffles/2-suit-spider/easy.json",
+    key: "easy",
+  },
+  {
+    file: "/shuffles/2-suit-spider/medium.json",
+    key: "medium",
+  },
+  {
+    file: "/shuffles/2-suit-spider/hard.json",
+    key: "hard",
+  },
 ];
 
 export const spider_4_suit_difficulties = [
-  { file: "/shuffles/spider_4_suit.json", key: "spider_4_suit" },
+  {
+    file: "/shuffles/4-suit-spider/easy.json",
+    key: "easy",
+  },
+  {
+    file: "/shuffles/4-suit-spider/medium.json",
+    key: "medium",
+  },
+  {
+    file: "/shuffles/4-suit-spider/hard.json",
+    key: "hard",
+  },
 ];
